@@ -1,0 +1,56 @@
+// { Driver Code Starts
+//Initial template for JAVA
+
+import java.util.Scanner;
+
+class aToi
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		sc.nextLine();
+		while(t>0)
+		{
+			String str = sc.nextLine();
+			
+			Solution obj = new Solution();
+			System.out.println(obj.atoi(str));
+		t--;
+		}
+	}
+}// } Driver Code Ends
+
+
+//User function template for JAVA
+
+/*You are required to complete this method */
+class Solution
+{
+    int atoi(String str) {
+	// Your code here
+	int s = 0;
+	boolean x = true;
+	if(str.charAt(0) == '-')
+	{
+	    x=false;
+	    str = str.substring(1);
+	}
+        for(int i = 0; i<str.length();i++)
+        {
+            if(str.charAt(i)>=48 && str.charAt(i)<=57)
+            {
+                s = (s*10) + (str.charAt(i)-48);
+            }
+            else
+            {
+                s=-1;
+                break;
+            }
+        }
+        if(x)
+        return s;
+        else
+        return -s;
+    }
+}
