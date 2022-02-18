@@ -1,0 +1,27 @@
+#User function Template for python3
+
+class Solution:
+    def prank(self, a, n): 
+        #code here
+       hmap = {}
+       for i in range(n):
+           hmap[a[i]] = i
+       for key,val in hmap.items():
+           idx = hmap[val]
+           a[idx] = key
+
+#{ 
+#  Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__': 
+    t = int(input())
+    for _ in range(t):
+        n = int(input())
+        a = list(map(int, input().strip().split()))
+        ob = Solution()
+        ob.prank(a, n)
+        for i in a:
+            print(i,end=" ")
+        print()
+# } Driver Code Ends
