@@ -1,0 +1,64 @@
+// { Driver Code Starts
+import java.util.Scanner;
+import java.util.*;
+import java.io.*;
+
+class ThirdLargestElement
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		while(t>0)
+		{
+			int n =sc.nextInt();
+			int arr[] = new int[n];
+			for(int i=0;i<n;i++)
+				arr[i] = sc.nextInt();
+			Solution g = new Solution();
+			System.out.println(g.thirdLargest(arr,n));
+		t--;
+		}
+	}
+}// } Driver Code Ends
+
+
+class Solution
+{
+    int thirdLargest(int arr[], int arr_size)
+    {
+	    // Your code here
+	     if (arr_size < 3)
+    {
+        return -1;
+    }
+
+    // Find first 
+    // largest element
+    int first = arr[0];
+    for (int i = 1;
+             i < arr_size ; i++)
+        if (arr[i] > first)
+            first = arr[i];
+
+    // Find second 
+    // largest element
+    int second = Integer.MIN_VALUE;
+    for (int i = 0; 
+             i < arr_size ; i++)
+        if (arr[i] > second && 
+            arr[i] < first)
+            second = arr[i];
+
+    // Find third
+    // largest element
+    int third = Integer.MIN_VALUE;
+    for (int i = 0; 
+             i < arr_size ; i++)
+        if (arr[i] > third && 
+            arr[i] < second)
+            third = arr[i];
+            
+        return third;    
+    }
+}
