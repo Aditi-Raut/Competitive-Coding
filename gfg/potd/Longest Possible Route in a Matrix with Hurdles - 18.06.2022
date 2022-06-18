@@ -1,0 +1,133 @@
+// { Driver Code Starts
+import java.io.*;
+import java.util.*;
+
+
+class IntArray
+{
+    public static int[] input(BufferedReader br, int n) throws IOException
+    {
+        String[] s = br.readLine().trim().split(" ");
+        int[] a = new int[n];
+        for(int i = 0; i < n; i++)
+            a[i] = Integer.parseInt(s[i]);
+        
+        return a;
+    }
+    
+    public static void print(int[] a)
+    {
+        for(int e : a)
+            System.out.print(e + " ");
+        System.out.println();
+    }
+    
+    public static void print(ArrayList<Integer> a)
+    {
+        for(int e : a)
+            System.out.print(e + " ");
+        System.out.println();
+    }
+}
+
+
+class IntMatrix
+{
+    public static int[][] input(BufferedReader br, int n, int m) throws IOException
+    {
+        int[][] mat = new int[n][];
+        
+        for(int i = 0; i < n; i++)
+        {
+            String[] s = br.readLine().trim().split(" ");
+            mat[i] = new int[s.length];
+            for(int j = 0; j < s.length; j++)
+                mat[i][j] = Integer.parseInt(s[j]);
+        }
+        
+        return mat;
+    }
+    
+    public static void print(int[][] m)
+    {
+        for(var a : m)
+        {
+            for(int e : a)
+                System.out.print(e + " ");
+            System.out.println();
+        }
+    }
+    
+    public static void print(ArrayList<ArrayList<Integer>> m)
+    {
+        for(var a : m)
+        {
+            for(int e : a)
+                System.out.print(e + " ");
+            System.out.println();
+        }
+    }
+}
+
+class GFG {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t;
+        t = Integer.parseInt(br.readLine());
+        while(t-- > 0){
+            
+            int[] a = IntArray.input(br, 2);
+            
+            
+            int[] b = IntArray.input(br, 4);
+            
+            
+            int[][] mat = IntMatrix.input(br, a[0], a[1]);
+            
+            Solution obj = new Solution();
+            int res = obj.longestPath(mat,a[0],a[1],b[0],b[1],b[2],b[3]);
+            
+            System.out.println(res);
+            
+        }
+    }
+}
+// } Driver Code Ends
+
+
+class Solution {
+    public static int longestPath(int[][] mat,int n,int m,int xs,int ys,int xd,int yd) {
+        // code here
+        if(xd==xs && yd==ys) return 0;
+        boolean[][] visited = new boolean[n][m];
+        for(int i = 0; i<n;i++)
+        {
+            for(int j = 0; j<m;j++)
+            {
+                visited[i][j] = false;
+            }
+        }
+        int path = helper(mat,n,m,xs,ys,xd,yd,visited,0);
+        return path==0?-1:path;
+    }
+    
+    public static int helper(int[][] mat,int n,int m,int xs,int ys,int xd,int yd, boolean[][] visited, int path)
+    {
+        if(xs>=n || xs<0 || ys>=m || ys<0) return 0;
+        if(mat[xs][ys] == 0) return 0;
+        if(visited[xs][ys] == true) return 0;
+        if(xs==xd && ys==yd) return path;
+        
+        visited[xs][ys] = true;
+        int path1 = helper(mat,n,m,xs+1,ys,xd,yd,visited,path+1);
+        int path2 = helper(mat,n,m,xs,ys+1,xd,yd,visited,path+1);
+        int path3 = helper(mat,n,m,xs-1,ys,xd,yd,visited,path+1);
+        int path4 = helper(mat,n,m,xs,ys-1,xd,yd,visited,path+1);
+        
+        visited[xs][ys] = false;
+        
+        return Math.max(Math.max(path1,path2), Math.max(path3,path4));
+        
+    }
+}
+        
